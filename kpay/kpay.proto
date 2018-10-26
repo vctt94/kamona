@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package kpay;
+
+service Payment {
+    rpc ResgisterPayment(RegisterPaymentInput) returns (RegisterPaymentOutput) {}
+}
+
+enum Coin {
+    DCR = 0;
+}
+
+message RegisterPaymentInput {
+    int64 amount = 1;
+    Coin coin = 2;
+}
+
+message RegisterPaymentOutput {
+    string payment_id = 1;
+    int64 amount = 2;
+    Coin coin = 3;
+    string address = 4;
+    int64 good_untill = 5;
+}

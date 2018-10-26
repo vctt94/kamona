@@ -1,0 +1,71 @@
+syntax = "proto3";
+package kauth;
+
+import "google/api/annotations.proto";
+
+message PingMessage {
+    string greeting = 1;
+}
+
+service Ping {
+    rpc SayHello(PingMessage) returns (PingMessage) {
+        option (google.api.http) = {
+            post: "/1/ping",
+            body: "*"
+        };
+    }
+}
+
+service Authentication {
+    rpc Signup(SingupInput) returns (SignupOutput) {
+        option (google.api.http) = {
+            post: "/user/new",
+            body: "*"
+        };
+    }
+    rpc Login(LoginInput) returns (LoginOutput) {
+        option (google.api.http) = {
+            post: "/user/login",
+            body: "*"
+        };
+    }
+    rpc Me(MeInput) returns (User) {
+        option (google.api.http) = {
+            get: "/user/me",
+        };
+    }
+}
+
+message MeInput{}
+
+message SingupInput {
+    string email = 1;
+    string password = 2;
+}
+
+message SignupOutput {
+    string verification_token = 1;
+    string error = 2;
+    bool success = 3;
+}
+
+message LoginInput {
+    string email = 1;
+    string password = 2;
+}
+
+message LoginOutput {
+    string token = 1;
+    string error = 2;
+    bool success = 3;
+}
+
+message User {
+    string id = 1;
+    string email = 2;
+    string password_hash = 3;
+    enum AccessLevel {
+        USER = 0;
+        ADMIN = 1;
+    }
+}
