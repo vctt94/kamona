@@ -73,11 +73,3 @@ func (s *Server) Me(ctx context.Context, in *MeInput) (*User, error) {
 		Email: user.Email,
 	}, nil
 }
-
-// func getValueFromContext(ctx context.Context, string key) {
-// 	if v := ctx.Value(k); v != nil {
-// 		fmt.Println("found value:", v)
-// 		return
-// 	}
-// 	fmt.Println("key not found:", k)
-// }

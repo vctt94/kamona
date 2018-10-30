@@ -71,15 +71,6 @@ func unaryInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServ
 		ctx = context.WithValue(ctx, "userid", user.ID)
 		return handler(ctx, req)
 	}
-	// log.Printf("this is info %+v", info)
-	// if info.FullMethod != "/kauth.Authentication/Signup" {
-	// 	clientID, err := authenticateClient(ctx, s)
-	// 	if err != nil {
-	// 		return nil, err
-	// 	}
-	// 	ctx = context.WithValue(ctx, clientIDKey, clientID)
-	// 	return handler(ctx, req)
-	// }
 	return handler(ctx, req)
 }
 
