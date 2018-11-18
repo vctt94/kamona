@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package kamonarpc;
+
+// Version Service
+service VersionService {
+	rpc Version (VersionRequest) returns (VersionResponse);
+}
+
+message VersionRequest {}
+message VersionResponse {
+	string version_string = 1;
+	uint32 major = 2;
+	uint32 minor = 3;
+	uint32 patch = 4;
+	string prerelease = 5;
+	string build_metadata = 6;
+}
+
+// Auth Service
+service AuthService {
+	rpc Signup(SingupInput) returns (SignupOutput);
+	rpc Login(LoginInput) returns (LoginOutput);
+	rpc Me(MeInput) returns (User);
+}
+
+message MeInput{}
+
+message SingupInput {
+    string email = 1;
+    string password = 2;
+}
+
+message SignupOutput {
+    string verification_token = 1;
+    string error = 2;
+    bool success = 3;
+}
+
+message LoginInput {
+    string email = 1;
+    string password = 2;
+}
+
+message LoginOutput {
+    string token = 1;
+    string error = 2;
+    bool success = 3;
+}
+
+message User {
+    string id = 1;
+    string email = 2;
+    string password_hash = 3;
+    enum AccessLevel {
+        USER = 0;
+        ADMIN = 1;
+    }
+}

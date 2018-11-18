@@ -1,4 +1,5 @@
 syntax = "proto3";
+import "google/api/annotations.proto";
 
 package kpay;
 
