@@ -3,7 +3,7 @@ package kauth
 import (
 	"context"
 	"fmt"
-	"kamona/database"
+	"github.com/getset0/kamona/database"
 	"log"
 	"sync"
 
